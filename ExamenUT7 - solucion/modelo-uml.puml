@@ -1,0 +1,71 @@
+@startuml
+class Creeper {
+~ boolean haExplotado
++ boolean recibirAtaque(int)
++ int getPuntosExperiencia()
++ void explotar()
+}
+class Manzana {
++ void usar(Entidad)
+}
+class Jugador {
+- String nombre
+- List<Item> inventario
+- int vida
+- int nivel
+- int puntosExperiencia
++ String getNombre()
++ boolean atacar(Entidad)
++ boolean recibirAtaque(int)
++ void sanar(int)
++ void sumarPuntosExperiencia(int)
++ void introducirItemAInventario(Item)
+}
+class PatataPodrida {
++ void usar(Entidad)
+}
+class Esqueleto {
+~ int numFlechas
++ boolean disparar(Entidad)
++ boolean atacar(Entidad)
++ int getPuntosExperiencia()
+}
+class Partida {
++ {static} void main(String[])
+}
+abstract class Item {
+# int cantidad
++ {abstract}void usar(Entidad)
++ String getNombre()
+}
+interface Entidad {
++ String getNombre()
++ boolean atacar(Entidad)
++ boolean recibirAtaque(int)
++ void sanar(int)
+}
+
+class Zombie {
++ int getPuntosExperiencia()
+}
+abstract class Mob {
+# int vida
+# int danoDeAtaque
++ boolean atacar(Entidad)
++ boolean recibirAtaque(int)
++ void sanar(int)
++ String getNombre()
++ {abstract}int getPuntosExperiencia()
+}
+
+
+
+Item <|-- Manzana
+Entidad <|.. Jugador
+Item <|-- PatataPodrida
+Mob <|-- Creeper
+Mob <|-- Esqueleto
+Mob <|-- Zombie
+Entidad <|.. Mob
+Jugador::inventario *-- Item
+@enduml
